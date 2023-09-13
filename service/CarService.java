@@ -22,6 +22,10 @@ public class CarService {
         return carRepository.findAll();
     }
 
+    public Car findById(String id) {
+        return carRepository.findById(id).orElse(null);
+    }
+
     public void save(Car car) {
         carRepository.save(car);
     }
@@ -31,12 +35,12 @@ public class CarService {
     }
 
     public void update(Car car) {
-        if (carRepository.findById(car.getId()) != null) {
+        if (findById(car.getId()) != null) {
             save(car);
         }
     }
 
-    public List<Car> returnRandonCars(Integer numOfCars) throws Exception {
+    public List<Car> findRandonCars(Integer numOfCars) throws Exception {
         List<Car> carsList = findAll();
         verifyNumber(numOfCars, carsList.size());
         Set<Car> returnCars = new HashSet<>();

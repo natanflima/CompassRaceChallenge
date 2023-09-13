@@ -19,11 +19,11 @@ public class CarController {
     public CarResponse findCarsToNumbers(@RequestParam String id) throws Exception {
         verifyHeaders(id);
         Integer num = Integer.valueOf(id);
-        return converteToResponse(carService.returnRandonCars(num));
+        return converteToResponse(carService.findRandonCars(num));
     }
 
-    @GetMapping
-    public CarResponse findAll() {
+    @GetMapping("/findAll")
+    public CarResponse findAllCars() {
         return converteToResponse(carService.findAll());
     }
 
@@ -51,7 +51,7 @@ public class CarController {
     private void verifyHeaders(String id) throws Exception {
         Integer num = Integer.valueOf(id);
         if (num < 3 || num > 10)
-            throw new Exception("Header invalido");
+            throw new Exception("Invalid Header");
     }
 }
 
